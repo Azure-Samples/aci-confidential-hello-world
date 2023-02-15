@@ -1,57 +1,42 @@
-# Project Name
+---
+page_type: sample
+languages:
+- python
+- C
+products:
+- azure-container-instances
+- azure attestation-service
+description: "Confidential containers on ACI samples"
+urlFragment: confidential-aci-samples
+---
 
-(short, 1-3 sentenced, description of the project)
 
-## Features
+# Azure Container Instances Confidential Hello World
 
-This project framework provides the following features:
+This sample is a basic Python application used to demonstrate [Confidential Containers on Azure Container Instances](aka.ms/aci). In this sample an AMD SEV SNP report containing the container groups firmware measurements will be displayed in a Python Flask web application.
 
-* Feature 1
-* Feature 2
-* ...
+The packaged version of this application is available on [Microsoft Container Registry](https://registry.hub.docker.com/_/microsoft-azuredocs-aci-helloworld?tab=description).
+
+![Hello World Hardware Report](./media/hello-world-cc.png)
 
 ## Getting Started
 
-### Prerequisites
+### Tutorials
 
-(ideally very short, if any)
-
-- OS
-- Library version
-- ...
-
-### Installation
-
-(ideally very short)
-
-- npm install [package name]
-- mvn install
-- ...
-
-### Quickstart
-(Add steps to get up and running quickly)
-
-1. git clone [repository clone url]
-2. cd [repository name]
-3. ...
+* [Deploy via Portal](aka.ms/aciccportal)
+* [Deploy via ARM with a custom confidential computing enforcement policy](aka.ms/aciccarm)
 
 
-## Demo
+## Contributing
 
-A demo app is included to show how to use the project.
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit <https://cla.opensource.microsoft.com.>
 
-To run the demo, follow these steps:
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
 
-(Add steps to start up the demo)
-
-1.
-2.
-3.
-
-## Resources
-
-(Any additional resources or related projects)
-
-- Link to supporting information
-- Link to similar sample
-- ...
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
