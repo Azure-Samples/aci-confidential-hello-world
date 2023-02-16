@@ -1,8 +1,10 @@
+import subprocess
+import string
+import os
+import stat
 # Importing flask module in the project is mandatory
 # An object of Flask class is our WSGI application.
 from flask import Flask
-import subprocess
-import string
 # Flask constructor takes the name of
 # current module (__name__) as argument.
 app = Flask(__name__)
@@ -14,13 +16,20 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    out = (subprocess.run("./verbose-report",
+    filename = "./verbose-report"
+    # make sure the file is executable
+    if not os.access(filename, os.X_OK):
+        # make it executable if it's not
+        st = os.stat(filename)
+        os.chmod(filename, st.st_mode |
+                 stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+    out = (subprocess.run(filename,
                           capture_output=True, encoding="UTF-8")).stdout
 
-    formatted_text = out.replace("\n"," ").split(" ")
+    formatted_text = out.replace("\n", " ").split(" ")
     formatted_text = [x for x in formatted_text if x != ""]
 
-    is_hex = lambda x: all(c in string.hexdigits for c in x)
+    def is_hex(x): return all(c in string.hexdigits for c in x)
 
     out = []
     temp_out = ["<br>"]
@@ -54,11 +63,6 @@ def index():
                     counter = 0
                 out.append(item)
                 counter += 1
-
-
-
-
-
 
     # ACI image source
     image = "<img src=\"https://azure.microsoft.com/svghandler/container-instances?width=600&height=315\" alt=\"Microsoft ACI Logo\" width=\"600\" height=\"315\"><br>"
