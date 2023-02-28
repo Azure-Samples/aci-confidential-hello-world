@@ -23,8 +23,8 @@ The packaged version of this application is available on [Microsoft Container Re
 
 ### Tutorials
 
-* [Deploy via Portal](aka.ms/aciccportal)
-* [Deploy via ARM with a custom confidential computing enforcement policy](aka.ms/aciccarm)
+* [Deploy via Portal](https://aka.ms/aciccportal)
+* [Deploy via ARM with a custom confidential computing enforcement policy](https://aka.ms/aciccarm)
 
 
 ## Contributing
