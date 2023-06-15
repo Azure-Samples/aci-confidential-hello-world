@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "anyOf": [
+    {
+      "authority": "https://sharedweu.weu.attest.azure.net",
+      "allOf": [
+        {
+          "claim": "x-ms-attestation-type",
+          "equals": "sevsnpvm"
+        },
+        {
+          "claim": "x-ms-compliance-status",
+          "equals": "azure-compliant-cvm"
+        }
+      ]
+    },
+    {
+      "authority": "https://sharedeus2.weu2.attest.azure.net",
+      "allOf": [
+        {
+          "claim": "x-ms-attestation-type",
+          "equals": "sevsnpvm"
+        },
+        {
+          "claim": "x-ms-compliance-status",
+          "equals": "azure-compliant-cvm"
+        }
+      ]
+    }
+  ]
+}
