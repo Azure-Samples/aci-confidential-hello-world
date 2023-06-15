@@ -12,7 +12,7 @@
 *.idea/*
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-
+*.idea/*
 # Mono auto generated files
 mono_crash.*
 
