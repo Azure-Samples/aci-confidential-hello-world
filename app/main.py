@@ -59,7 +59,7 @@ def upload_file_A():
         f = open("txt_a.txt", "w")
         f.write(str(file_content.get("num")))
         f.close()
-        return "txt_a.txt"
+        return "Successfully upload file"
 
 @app.route('/uploaderB', methods = ['POST'])
 def upload_file_B():
@@ -69,7 +69,7 @@ def upload_file_B():
         f = open("txt_b.txt", "w")
         f.write(str(file_content.get("num")))
         f.close()
-        return "txt_b.txt"
+        return "Successfully upload file"
 #
 # @app.route('/insertA', methods=['POST'])
 # def insert_a():
