@@ -54,6 +54,9 @@ def upload():
 @app.route('/uploaderA', methods = ['POST'])
 def upload_file_A():
     if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return 'NO FILE PART'
         f = request.files['file']
         file_content = json.loads(encrypt_decrypt_file(f, is_encrypted=True))
         f = open("txt_a.txt", "w")
@@ -113,7 +116,7 @@ def encrypt_decrypt_file(file_name, is_encrypted):
         return crypto_client.decrypt(file_name.algorithm, file_name.ciphertext)
     else:
         f = open(file_name, "r")
-        res = int(f.read())
+        res = f.read()
         f.close()
         return crypto_client.encrypt(EncryptionAlgorithm.rsa_oaep, res)
 
