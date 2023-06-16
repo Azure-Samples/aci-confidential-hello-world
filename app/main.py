@@ -106,7 +106,7 @@ def get_sum():
 def encrypt_decrypt_file(file_name, is_encrypted):
     credential = DefaultAzureCredential()
     key_client = KeyClient(vault_url="https://hackathon2023vault.vault.azure.net/", credential=credential)
-    key = key_client.get_key("encryptionkey")
+    key = key_client.get_key("testK")
     crypto_client = CryptographyClient(key, credential=credential)
 
     if is_encrypted:
