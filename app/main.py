@@ -1,5 +1,6 @@
 # Importing flask module in the project is mandatory
 # An object of Flask class is our WSGI application.
+import json
 import os
 
 from flask import request, send_file, render_template, flash, redirect, url_for
@@ -50,20 +51,24 @@ def start():
 def upload_file():
     return render_template('upload.html')
 
-@app.route('/uploaderA', methods = ['GET', 'POST'])
+@app.route('/uploaderA', methods = ['POST'])
 def upload_file():
     if request.method == 'POST':
         f = request.files['file']
-        file = encrypt_decrypt_file(f, is_encrypted=True)
-        f.save(secure_filename("txt_a.txt"))
+        file_content = json.loads(encrypt_decrypt_file(f, is_encrypted=True))
+        f = open("txt_a.txt", "w")
+        f.write(str(file_content.get("num")))
+        f.close()
         return "txt_a.txt"
 
-@app.route('/uploaderB', methods = ['GET', 'POST'])
+@app.route('/uploaderB', methods = ['POST'])
 def upload_file():
     if request.method == 'POST':
         f = request.files['file']
-        file = encrypt_decrypt_file(f, is_encrypted=True)
-        f.save(secure_filename("txt_b.txt"))
+        file_content = json.loads(encrypt_decrypt_file(f, is_encrypted=True))
+        f = open("txt_b.txt", "w")
+        f.write(str(file_content.get("num")))
+        f.close()
         return "txt_b.txt"
 #
 # @app.route('/insertA', methods=['POST'])
