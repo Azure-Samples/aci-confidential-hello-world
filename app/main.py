@@ -1,7 +1,8 @@
 # Importing flask module in the project is mandatory
 # An object of Flask class is our WSGI application.
 from flask import request, send_file
-from azure.identity import DefaultAzureCredential
+from azure.identity import Defa
+# ultAzureCredential
 from azure.keyvault.keys import KeyClient
 # Flask constructor takes the name of
 # current module (__name__) as argument.
@@ -34,6 +35,7 @@ def insert_b():
 
 def insert(file_name):
     request_j = request.get_json()
+
     f = open(file_name, "w")
     f.write(str(request_j.get("num")))
     f.close()
@@ -63,6 +65,7 @@ def get_encrypted_result():
 
     for key in keys:
         # the list doesn't include values or versions of the keys
+        print(key)
         f = open("key.txt", "a")
         f.write(key.name)
         f.close()
