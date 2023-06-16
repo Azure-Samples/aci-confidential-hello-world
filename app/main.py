@@ -22,7 +22,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 # Check Configuration section for more details
-app.config['./aci-hackathon/enc']
+#app.config['./aci-hackathon/enc']
 
 
 
