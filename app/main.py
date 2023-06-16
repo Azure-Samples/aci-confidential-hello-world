@@ -1,9 +1,14 @@
 # Importing flask module in the project is mandatory
 # An object of Flask class is our WSGI application.
-from flask import request, send_file, render_template
-#from azure.identity import DefaultAzureCredential
-#from azure.keyvault.keys import KeyClient
+import os
+
+from flask import request, send_file, render_template, flash, redirect, url_for
+from azure.identity import DefaultAzureCredential
+from azure.keyvault.keys import KeyClient
+from azure.keyvault.keys.crypto import CryptographyClient, EncryptionAlgorithm
+
 # Flask constructor takes the name of
+
 # current module (__name__) as argument.
 
 # The route() function of the Flask class is a decorator,
@@ -19,6 +24,25 @@ app = Flask(__name__)
 app.config['./aci-hackathon/enc']
 
 
+
+# @app.route('/', methods=['GET', 'POST'])
+# def upload_file():
+#     if request.method == 'POST':
+#         # check if the post request has the file part
+#         if 'file' not in request.files:
+#             flash('No file part')
+#             return redirect(request.url)
+#         file = request.files['file']
+#         # If the user does not select a file, the browser submits an
+#         # empty file without a filename.
+#         if file.filename == '':
+#             flash('No selected file')
+#             return redirect(request.url)
+#         filename = secure_filename(file.filename)
+#         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+#         return redirect(url_for('download_file', name=filename))
+
+
 @app.route('/')
 def start():
     return "START APPLICATION"
@@ -26,12 +50,21 @@ def start():
 def upload_file():
     return render_template('upload.html')
 
-@app.route('/uploader', methods = ['GET', 'POST'])
+@app.route('/uploaderA', methods = ['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         f = request.files['file']
-        f.save(secure_filename(f.filename))
-        return 'file uploaded successfully'
+        file = encrypt_decrypt_file(f, is_encrypted=True)
+        f.save(secure_filename("txt_a.txt"))
+        return "txt_a.txt"
+
+@app.route('/uploaderB', methods = ['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['file']
+        file = encrypt_decrypt_file(f, is_encrypted=True)
+        f.save(secure_filename("txt_b.txt"))
+        return "txt_b.txt"
 #
 # @app.route('/insertA', methods=['POST'])
 # def insert_a():
@@ -65,6 +98,20 @@ def get_sum():
     f.close()
     return send_file("result.txt", as_attachment=True)
 
+def encrypt_decrypt_file(file_name, is_encrypted):
+    credential = DefaultAzureCredential()
+    key_client = KeyClient(vault_url="https://hackathon2023vault.vault.azure.net/", credential=credential)
+
+    key = key_client.get_key("encryptionkey")
+    crypto_client = CryptographyClient(key, credential=credential)
+    plaintext = b"plaintext"
+
+    if is_encrypted:
+        return crypto_client.decrypt(file_name.algorithm, file_name.ciphertext)
+    else:
+        return crypto_client.encrypt(EncryptionAlgorithm.rsa_oaep, plaintext)
+
+
 
 def read_to_int(file_name):
     f = open(file_name, "r")
@@ -72,18 +119,18 @@ def read_to_int(file_name):
     f.close()
     return res
 
-# @app.route('/get_encrypted_result', methods=['GET'])
-# def get_encrypted_result():
-    # credential = DefaultAzureCredential()
-    # key_client = KeyClient(vault_url="https://hackathon2023vault.vault.azure.net/", credential=credential)
-    # keys = key_client.list_properties_of_keys()
-    #
-    # for key in keys:
-    #     # the list doesn't include values or versions of the keys
-    #     f = open("key.txt", "a")
-    #     f.write(key.name)
-    #     f.close()
-    #     return send_file("key.txt", as_attachment=True)
+@app.route('/get_encrypted_result', methods=['GET'])
+def get_encrypted_result():
+    credential = DefaultAzureCredential()
+    key_client = KeyClient(vault_url="https://hackathon2023vault.vault.azure.net/", credential=credential)
+    keys = key_client.list_properties_of_keys()
+
+    for key in keys:
+        # the list doesn't include values or versions of the keys
+        f = open("key.txt", "a")
+        f.write(key.name)
+        f.close()
+        return send_file("key.txt", as_attachment=True)
 
 # main driver function
 if __name__ == '__main__':
