@@ -118,7 +118,6 @@ def encrypt_decrypt_file(file_name, is_encrypted):
         return crypto_client.encrypt(EncryptionAlgorithm.rsa_oaep, res)
 
 
-
 def read_to_int(file_name):
     f = open(file_name, "r")
     res = int(f.read())
