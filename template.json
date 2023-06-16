@@ -11,14 +11,14 @@
       },
       "location": {
         "type": "string",
-        "defaultValue": "North Europe",
+        "defaultValue": "EAST US",
         "metadata": {
           "description": "Location for all resources."
         }
       },
       "image": {
         "type": "string",
-        "defaultValue": "mcr.microsoft.com/aci/aci-confidential-helloworld:v1",
+        "defaultValue": "ohendrick/hackathon2023dockerhub:flask-demo",
         "metadata": {
           "description": "Container image to deploy. Should be of the form repoName/imagename:tag for images stored in public Docker Hub, or a fully qualified URI for other registries. Images from private registries require additional registry credentials."
         }
