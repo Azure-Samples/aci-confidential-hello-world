@@ -22,7 +22,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 # Check Configuration section for more details
-app.config['./aci-hackathon/enc']
+# app.config['./aci-hackathon/enc']
 
 
 
@@ -48,11 +48,11 @@ app.config['./aci-hackathon/enc']
 def start():
     return "START APPLICATION"
 @app.route('/upload')
-def upload_file():
+def upload():
     return render_template('upload.html')
 
 @app.route('/uploaderA', methods = ['POST'])
-def upload_file():
+def upload_file_A():
     if request.method == 'POST':
         f = request.files['file']
         file_content = json.loads(encrypt_decrypt_file(f, is_encrypted=True))
@@ -62,7 +62,7 @@ def upload_file():
         return "txt_a.txt"
 
 @app.route('/uploaderB', methods = ['POST'])
-def upload_file():
+def upload_file_B():
     if request.method == 'POST':
         f = request.files['file']
         file_content = json.loads(encrypt_decrypt_file(f, is_encrypted=True))
@@ -106,15 +106,16 @@ def get_sum():
 def encrypt_decrypt_file(file_name, is_encrypted):
     credential = DefaultAzureCredential()
     key_client = KeyClient(vault_url="https://hackathon2023vault.vault.azure.net/", credential=credential)
-
     key = key_client.get_key("encryptionkey")
     crypto_client = CryptographyClient(key, credential=credential)
-    plaintext = b"plaintext"
 
     if is_encrypted:
         return crypto_client.decrypt(file_name.algorithm, file_name.ciphertext)
     else:
-        return crypto_client.encrypt(EncryptionAlgorithm.rsa_oaep, plaintext)
+        f = open(file_name, "r")
+        res = int(f.read())
+        f.close()
+        return crypto_client.encrypt(EncryptionAlgorithm.rsa_oaep, res)
 
 
 
