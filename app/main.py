@@ -1,8 +1,8 @@
 # Importing flask module in the project is mandatory
 # An object of Flask class is our WSGI application.
 from flask import request, send_file, render_template
-#from azure.identity import DefaultAzureCredential
-#from azure.keyvault.keys import KeyClient
+from azure.identity import DefaultAzureCredential
+from azure.keyvault.keys import KeyClient
 # Flask constructor takes the name of
 # current module (__name__) as argument.
 
@@ -72,18 +72,18 @@ def read_to_int(file_name):
     f.close()
     return res
 
-# @app.route('/get_encrypted_result', methods=['GET'])
-# def get_encrypted_result():
-    # credential = DefaultAzureCredential()
-    # key_client = KeyClient(vault_url="https://hackathon2023vault.vault.azure.net/", credential=credential)
-    # keys = key_client.list_properties_of_keys()
-    #
-    # for key in keys:
-    #     # the list doesn't include values or versions of the keys
-    #     f = open("key.txt", "a")
-    #     f.write(key.name)
-    #     f.close()
-    #     return send_file("key.txt", as_attachment=True)
+@app.route('/get_encrypted_result', methods=['GET'])
+def get_encrypted_result():
+    credential = DefaultAzureCredential()
+    key_client = KeyClient(vault_url="https://hackathon2023vault.vault.azure.net/", credential=credential)
+    keys = key_client.list_properties_of_keys()
+
+    for key in keys:
+        # the list doesn't include values or versions of the keys
+        f = open("key.txt", "a")
+        f.write(key.name)
+        f.close()
+        return send_file("key.txt", as_attachment=True)
 
 # main driver function
 if __name__ == '__main__':
