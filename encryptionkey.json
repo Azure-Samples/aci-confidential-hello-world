@@ -1,0 +1,44 @@
+{
+  "attributes": {
+    "created": "2023-06-16T16:52:02+00:00",
+    "enabled": true,
+    "expires": "2023-07-01T00:00:00+00:00",
+    "exportable": true,
+    "notBefore": null,
+    "recoverableDays": 90,
+    "recoveryLevel": "Recoverable+Purgeable",
+    "updated": "2023-06-16T16:52:02+00:00"
+  },
+  "key": {
+    "crv": null,
+    "d": null,
+    "dp": null,
+    "dq": null,
+    "e": "AQAB",
+    "k": null,
+    "keyOps": [
+      "encrypt",
+      "decrypt",
+      "sign",
+      "verify",
+      "wrapKey",
+      "unwrapKey"
+    ],
+    "kid": "https://hackathon2023vault.vault.azure.net/keys/encryptionkey/094abe866d1a4b259a45dd5d477ee8da",
+    "kty": "RSA-HSM",
+    "n": "tT9IKPoWZZbUuNNS4ObBfgEggd3K5DT/uYAH56NPOYwRLM3v7PRH+yDPMDyukoUIpRua5UnkDLDwi2VVi5btj8p68t1q8M+Pi6bykN6qjOhfrRul0dXdOBn5j43tYSc6AfQb92V7H8aH2Zb4VfFAOoGSxlNJ0olEp0muhStxi3ZwJ4gppUPxzZihaf6+s01ll0LFkOdI7wz8DjFkLpxrw+VlC3ceTyB2bCWFVi5EYP37URWY37dhKtDlECnyelMCqE7TWcBIRUnIGOkHdEmkHrpD2m1gnYRe/kq0aVVn3EsGHVfGpHWm29X5BrFEjYhzc7lHb3TKThUPc5CzP6UHPw==",
+    "p": null,
+    "q": null,
+    "qi": null,
+    "t": null,
+    "x": null,
+    "y": null
+  },
+  "managed": null,
+  "releasePolicy": {
+    "contentType": "application/json; charset=utf-8",
+    "encodedPolicy": "{\"version\":\"1.0.0\",\"anyOf\":[{\"authority\":\"https://sharedweu.weu.attest.azure.net\",\"allOf\":[{\"claim\":\"x-ms-isolation-tee.x-ms-attestation-type\",\"equals\":\"sevsnpvm\"},{\"claim\":\"x-ms-isolation-tee.x-ms-compliance-status\",\"equals\":\"azure-compliant-cvm\"}]}]}",
+    "immutable": false
+  },
+  "tags": null
+}
