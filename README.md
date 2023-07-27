@@ -15,7 +15,7 @@ urlFragment: confidential-aci-samples
 
 This sample is a basic Python application used to demonstrate [Confidential Containers on Azure Container Instances](aka.ms/aci). In this sample an AMD SEV SNP report containing the container groups firmware measurements will be displayed in a Python Flask web application.
 
-The packaged version of this application is available on [Microsoft Container Registry](https://registry.hub.docker.com/_/microsoft-azuredocs-aci-helloworld?tab=description).
+The packaged version of this application is available on [Microsoft Container Registry](https://mcr.microsoft.com/v2/aci/aci-confidential-helloworld/tags/list).
 
 ![Hello World Hardware Report](./media/hello-world-cc.png)
 
@@ -25,7 +25,6 @@ The packaged version of this application is available on [Microsoft Container Re
 
 * [Deploy via Portal](https://aka.ms/aciccportal)
 * [Deploy via ARM with a custom confidential computing enforcement policy](https://aka.ms/aciccarm)
-
 
 ## Contributing
 
