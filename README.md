@@ -1,3 +1,7 @@
+# DEPRECATED
+
+The contents of this repository have been moved to the [Microsoft Organization](https://github.com/microsoft/confidential-container-demos/tree/main/hello-world/ACI)
+
 ---
 page_type: sample
 languages:
